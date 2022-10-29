@@ -1,0 +1,17 @@
+server:
+  port: 8081
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  profiles:
+    include:
+      - db
+      - mail
+      - aws
+      - log
+      - kafka
+

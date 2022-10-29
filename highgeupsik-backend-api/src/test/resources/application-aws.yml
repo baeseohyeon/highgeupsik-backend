@@ -1,0 +1,18 @@
+cloud:
+  aws:
+    credentials:
+      access-Key: testAccessKey
+      secret-Key: testSecretKey
+    s3:
+      bucket: testBucketName
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error

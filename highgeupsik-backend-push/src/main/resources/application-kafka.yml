@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    topic:
+      comment-created: v1.event.comment-created
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: push3
+      auto-offset-reset: latest
+      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-serializer: org.springframework.kafka.common.serializer.StringDeserializer
+    producer:
+      bootstrap-servers: localhost:9092

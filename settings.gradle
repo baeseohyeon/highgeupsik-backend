@@ -1,0 +1,5 @@
+rootProject.name = 'highgeupsik-backend'
+include 'highgeupsik-backend-api'
+include 'highgeupsik-backend-push'
+include 'highgeupsik-backend-core'
+
