@@ -1,4 +1,4 @@
-package com.highgeupsik.backend.api.repository;
+package com.highgeupsik.backend.api.repository.notification;
 
 import com.highgeupsik.backend.core.model.board.Comment;
 import com.highgeupsik.backend.core.model.message.Room;

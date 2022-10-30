@@ -1,4 +1,4 @@
-package com.highgeupsik.backend.api.events;
+package com.highgeupsik.backend.core.events;
 
 import com.highgeupsik.backend.core.model.user.User;
 import lombok.Getter;

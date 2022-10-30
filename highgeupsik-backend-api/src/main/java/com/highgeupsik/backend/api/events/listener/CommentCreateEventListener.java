@@ -1,6 +1,6 @@
 package com.highgeupsik.backend.api.events.listener;
 
-import com.highgeupsik.backend.api.events.CommentCreateEvent;
+import com.highgeupsik.backend.core.events.CommentCreateEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -12,7 +12,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Component
 public class CommentCreateEventListener {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, CommentCreateEvent> kafkaTemplate;
 
     @Value("v1.event.comment-created")
     private String topic;
@@ -20,6 +20,6 @@ public class CommentCreateEventListener {
     @Async
     @TransactionalEventListener
     public void handleCommentCreateEvent(CommentCreateEvent commentCreateEvent) {
-        kafkaTemplate.send(topic, commentCreateEvent.getContent());
+        kafkaTemplate.send(topic, commentCreateEvent);
     }
 }

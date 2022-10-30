@@ -6,6 +6,9 @@ server:
       enabled: true
       force: true
 
+firebase:
+  jsonpath: ${FIREBASE_PATH}
+
 spring:
   profiles:
     include:
@@ -14,4 +17,3 @@ spring:
       - aws
       - log
       - kafka
-
