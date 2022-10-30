@@ -20,4 +20,5 @@ public class ErrorMessages {
     public static final String REGION_NOT_NULL = "region not null";
     public static final String CATEGORY_NOT_NULL = "category not null";
     public static final String SSE_CONNECT_ERROR = "sse connection error";
+    public static final String SUBSCRIPTION_NOT_FOUND = "subscription not found";
 }
