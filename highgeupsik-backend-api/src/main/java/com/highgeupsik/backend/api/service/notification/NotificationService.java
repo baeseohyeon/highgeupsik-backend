@@ -3,8 +3,8 @@ package com.highgeupsik.backend.api.service.notification;
 
 import static com.highgeupsik.backend.core.model.notification.NotificationMessage.MESSAGE_NOTIFICATION;
 
-import com.highgeupsik.backend.api.events.CommentCreateEvent;
-import com.highgeupsik.backend.api.repository.NotificationRepository;
+import com.highgeupsik.backend.core.events.CommentCreateEvent;
+import com.highgeupsik.backend.api.repository.notification.NotificationRepository;
 import com.highgeupsik.backend.core.exception.ErrorMessages;
 import com.highgeupsik.backend.core.exception.ResourceNotFoundException;
 import com.highgeupsik.backend.core.model.board.Board;

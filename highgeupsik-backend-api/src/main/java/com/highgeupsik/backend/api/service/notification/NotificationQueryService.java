@@ -1,8 +1,8 @@
 package com.highgeupsik.backend.api.service.notification;
 
-import static com.highgeupsik.backend.api.utils.PagingUtils.*;
+import static com.highgeupsik.backend.api.utils.PagingUtils.orderByCreatedDateDESC;
 
-import com.highgeupsik.backend.api.repository.NotificationRepository;
+import com.highgeupsik.backend.api.repository.notification.NotificationRepository;
 import com.highgeupsik.backend.core.dto.notification.NotificationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +22,7 @@ public class NotificationQueryService {
 
     public NotificationResult findAllByUserId(Long userId, Integer pageNum) {
         Page<NotificationDTO> notifications = notificationRepository.findAllByReceiverId(userId,
-            orderByCreatedDateDESC(pageNum, NOTIFICATION_COUNT))
+                orderByCreatedDateDESC(pageNum, NOTIFICATION_COUNT))
             .map(NotificationDTO::new);
         int remainNotificationCount = getRemainNotificationCount(notifications);
         return new NotificationResult(remainNotificationCount, notifications);
@@ -31,7 +31,7 @@ public class NotificationQueryService {
     private int getRemainNotificationCount(Page<NotificationDTO> notifications) {
         int count = 0;
         for (NotificationDTO notification : notifications) {
-            if(!notification.isReadFlag()){
+            if (!notification.isReadFlag()) {
                 count++;
             }
         }
@@ -42,8 +42,8 @@ public class NotificationQueryService {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class NotificationResult {
+
         int remainNotificationCount;
         Page<NotificationDTO> notifications;
     }
-
 }
