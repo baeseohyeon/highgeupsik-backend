@@ -1,11 +1,9 @@
 package com.highgeupsik.backend.api.service.notification;
 
-
-import static com.highgeupsik.backend.core.model.notification.NotificationMessage.MESSAGE_NOTIFICATION;
+import static com.highgeupsik.backend.core.exception.ErrorMessages.*;
 
 import com.highgeupsik.backend.core.events.CommentCreateEvent;
 import com.highgeupsik.backend.api.repository.notification.NotificationRepository;
-import com.highgeupsik.backend.core.exception.ErrorMessages;
 import com.highgeupsik.backend.core.exception.ResourceNotFoundException;
 import com.highgeupsik.backend.core.model.board.Board;
 import com.highgeupsik.backend.core.model.board.Comment;
@@ -17,8 +15,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.highgeupsik.backend.api.events.AlarmEvent;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,12 +37,11 @@ public class NotificationService {
 	public void saveRoomNotification(User user, Room room) {
 		Notification notification = Notification.ofRoom(user, room.getRecentMessage(), NotificationType.MESSAGE, room);
 		notificationRepository.save(notification);
-		applicationEventPublisher.publishEvent(new AlarmEvent(user.getId(), MESSAGE_NOTIFICATION));
 	}
 
 	public void readNotification(Long notificationId) {
 		Notification notification = notificationRepository.findById(notificationId)
-			.orElseThrow(() -> new ResourceNotFoundException(ErrorMessages.NOTIFICATION_NOT_FOUND));
+			.orElseThrow(() -> new ResourceNotFoundException(NOTIFICATION_NOT_FOUND));
 		notification.readNotification();
 	}
 
