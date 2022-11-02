@@ -1,7 +1,7 @@
 package com.highgeupsik.backend.core.model.message;
 
 import com.highgeupsik.backend.core.exception.ErrorMessages;
-import com.highgeupsik.backend.core.exception.UserException;
+import com.highgeupsik.backend.core.exception.WriterException;
 import com.highgeupsik.backend.core.model.TimeEntity;
 import com.highgeupsik.backend.core.model.board.Board;
 import com.highgeupsik.backend.core.model.user.User;
@@ -99,7 +99,7 @@ public class Room extends TimeEntity {
 
 	public void checkUser(Long userId) {
 		if (isNotRoomUser(userId)) {
-			throw new UserException(ErrorMessages.NOT_ROOM_USER);
+			throw new WriterException(ErrorMessages.NOT_ROOM_USER);
 		}
 	}
 

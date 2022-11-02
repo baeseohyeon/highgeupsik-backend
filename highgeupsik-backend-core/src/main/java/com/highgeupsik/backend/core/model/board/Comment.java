@@ -2,7 +2,7 @@ package com.highgeupsik.backend.core.model.board;
 
 import com.highgeupsik.backend.core.dto.comment.CommentReqDTO;
 import com.highgeupsik.backend.core.exception.ErrorMessages;
-import com.highgeupsik.backend.core.exception.UserException;
+import com.highgeupsik.backend.core.exception.WriterException;
 import com.highgeupsik.backend.core.model.TimeEntity;
 import com.highgeupsik.backend.core.model.user.User;
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class Comment extends TimeEntity {
 
     public void validateWriter(User user) {
         if (isNotWriter(user)) {
-            throw new UserException(ErrorMessages.WRITER_NOT_MATCH);
+            throw new WriterException(ErrorMessages.WRITER_NOT_MATCH);
         }
     }
 
@@ -106,10 +106,6 @@ public class Comment extends TimeEntity {
 
     public boolean isParent() {
         return this.equals(parent);
-    }
-
-    public boolean isReply() {
-        return !isParent();
     }
 
     public void toReply(Comment parent) {

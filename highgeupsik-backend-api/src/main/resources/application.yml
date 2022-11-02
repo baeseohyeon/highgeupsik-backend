@@ -17,7 +17,6 @@ spring:
     include:
       - oauth
       - db
-      - mail
       - aws
       - log
       - mvc

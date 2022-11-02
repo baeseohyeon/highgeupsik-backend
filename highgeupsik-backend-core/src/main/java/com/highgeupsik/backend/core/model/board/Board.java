@@ -1,7 +1,7 @@
 package com.highgeupsik.backend.core.model.board;
 
 import com.highgeupsik.backend.core.exception.ErrorMessages;
-import com.highgeupsik.backend.core.exception.UserException;
+import com.highgeupsik.backend.core.exception.WriterException;
 import com.highgeupsik.backend.core.model.TimeEntity;
 import com.highgeupsik.backend.core.model.UploadFile;
 import com.highgeupsik.backend.core.model.school.Region;
@@ -84,7 +84,7 @@ public class Board extends TimeEntity {
 
     public void validateWriter(User other) {
         if (!isWriter(other)) {
-            throw new UserException(ErrorMessages.WRITER_NOT_MATCH);
+            throw new WriterException(ErrorMessages.WRITER_NOT_MATCH);
         }
     }
 
