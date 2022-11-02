@@ -3,11 +3,9 @@ package com.highgeupsik.backend.api.controller;
 import static com.highgeupsik.backend.api.controller.ApiUtils.error;
 import static org.springframework.http.HttpStatus.*;
 
-import com.highgeupsik.backend.core.exception.MailException;
 import com.highgeupsik.backend.core.exception.ResourceNotFoundException;
-import com.highgeupsik.backend.core.exception.SseException;
 import com.highgeupsik.backend.core.exception.TokenException;
-import com.highgeupsik.backend.core.exception.UserException;
+import com.highgeupsik.backend.core.exception.WriterException;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -19,47 +17,34 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
-public class ApiExceptionHandler {
+public class GeneralExceptionHandler {
 
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler
-    public ApiResult<ApiError> resourceNotFoundException(ResourceNotFoundException e) {
+    public ApiResult<ApiError> handleResourceNotFoundException(ResourceNotFoundException e) {
         return error(new ApiError("NOT FOUND", e.getMessage()));
     }
 
     @ResponseStatus(FORBIDDEN)
     @ExceptionHandler
-    public ApiResult<ApiError> userException(UserException e) {
+    public ApiResult<ApiError> handleWriterException(WriterException e) {
         return error(new ApiError("FORBIDDEN", e.getMessage()));
     }
 
     @ResponseStatus(UNAUTHORIZED)
     @ExceptionHandler
-    public ApiResult<ApiError> tokenExpiredException(TokenException e) {
+    public ApiResult<ApiError> handleTokenException(TokenException e) {
         return error(new ApiError("UNAUTHORIZED", e.getMessage()));
     }
 
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler
-    public ApiResult<ApiError> beanValidException(BindException e) {
+    public ApiResult<ApiError> handleValidException(BindException e) {
         List<String> messages = e.getBindingResult()
             .getAllErrors()
             .stream()
             .map(DefaultMessageSourceResolvable::getDefaultMessage)
             .collect(Collectors.toList());
         return error(new ApiError("BAD", messages.toString()));
-    }
-
-    @ResponseStatus(SERVICE_UNAVAILABLE)
-    @ExceptionHandler
-    public ApiResult<ApiError> sseConnectException(SseException e) {
-        return error(new ApiError("SERVICE UNAVAILABLE", e.getMessage()));
-    }
-
-    @ResponseStatus(INTERNAL_SERVER_ERROR)
-    @ExceptionHandler
-    public ApiResult<ApiError> mailException(MailException e) {
-        log.error("mailException = {}", e);
-        return error(new ApiError("SERVER ERROR", e.getMessage()));
     }
 }
