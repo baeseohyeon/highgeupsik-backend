@@ -2,6 +2,7 @@ spring:
   kafka:
     topic:
       comment-created: v1.event.comment-created
+      user-joined: v1.event.user-joined
     consumer:
       bootstrap-servers: {KAFKA_URL}
       group-id: push3
