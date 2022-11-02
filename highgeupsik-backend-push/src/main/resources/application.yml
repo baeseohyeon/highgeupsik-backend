@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: ${PORT_NUM}
   servlet:
     encoding:
       charset: UTF-8
@@ -15,5 +15,4 @@ spring:
       - db
       - mail
       - aws
-      - log
       - kafka
