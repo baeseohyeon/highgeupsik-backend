@@ -1,6 +1,7 @@
 package com.highgeupsik.backend.api.jwt;
 
-import com.highgeupsik.backend.core.exception.ErrorMessages;
+import static com.highgeupsik.backend.core.exception.ErrorMessages.*;
+
 import com.highgeupsik.backend.core.exception.TokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -85,13 +86,13 @@ public class JwtTokenProvider {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            throw new TokenException(ErrorMessages.UNABLE_JWT_SIGNATURE);
+            throw new TokenException(UNABLE_JWT_SIGNATURE);
         } catch (ExpiredJwtException e) {
-            throw new TokenException(ErrorMessages.TOKEN_EXPIRED);
+            throw new TokenException(TOKEN_EXPIRED);
         } catch (UnsupportedJwtException e) {
-            throw new TokenException(ErrorMessages.UNSUPPORTED_JWT_TOKEN);
+            throw new TokenException(UNSUPPORTED_JWT_TOKEN);
         } catch (IllegalArgumentException e) {
-            throw new TokenException(ErrorMessages.WRONG_JWT_TOKEN);
+            throw new TokenException(WRONG_JWT_TOKEN);
         }
     }
 }
