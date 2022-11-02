@@ -12,18 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class FCMSendService {
 
-    public void send(FCMNotification notification) throws ExecutionException, InterruptedException {
-        Message message = Message.builder()
-            .setToken(notification.getToken())
-            .setWebpushConfig(
-                WebpushConfig.builder()
-                    .putHeader("ttl", "300")
-                    .setNotification(new WebpushNotification(notification.getTitle(), notification.getContent()))
-                    .build()
-            )
-            .build();
-
-        String response = FirebaseMessaging.getInstance().sendAsync(message).get();
-        log.info("Sent message: " + response);
+    public void send(FCMNotification notification) {
+        try {
+            Message message = Message.builder()
+                .setToken(notification.getToken())
+                .setWebpushConfig(
+                    WebpushConfig.builder()
+                        .putHeader("ttl", "300")
+                        .setNotification(new WebpushNotification(notification.getTitle(), notification.getContent()))
+                        .build()
+                )
+                .build();
+            String response = FirebaseMessaging.getInstance().sendAsync(message).get();
+            log.info("Sent message: " + response);
+        } catch (InterruptedException | ExecutionException e) {
+            log.error("fcm send exception occurred: {}", e.getMessage(), e);
+        }
     }
 }
