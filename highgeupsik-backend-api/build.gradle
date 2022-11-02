@@ -65,26 +65,13 @@ test {
     useJUnitPlatform()
 }
 
-def querydslDir = "$buildDir/generated/querydsl"
 querydsl {
     jpa = true
-    querydslSourcesDir = querydslDir
-}
-sourceSets {
-    main.java.srcDir querydslDir
-}
-configurations {
-    querydsl.extendsFrom compileClasspath
 }
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
 }
-
-project.afterEvaluate {
-    project.tasks.compileQuerydsl.options.compilerArgs = [
-            "-proc:only",
-            "-processor", project.querydsl.processors() +
-                    ',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
-    ]
+configurations {
+    querydsl.extendsFrom compileClasspath
 }
-compileQuerydsl.doFirst { if (file(querydslDir).exists()) delete(file(querydslDir)) }
+
