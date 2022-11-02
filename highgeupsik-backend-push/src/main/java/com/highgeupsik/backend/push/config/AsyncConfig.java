@@ -1,4 +1,4 @@
-package com.highgeupsik.backend.api.config;
+package com.highgeupsik.backend.push.config;
 
 import java.util.concurrent.Executor;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class AsyncConfig implements AsyncConfigurer {
         taskExecutor.setCorePoolSize(5);
         taskExecutor.setMaxPoolSize(10);
         taskExecutor.setQueueCapacity(50);
-        taskExecutor.setThreadNamePrefix("api-async-thread-");
+        taskExecutor.setThreadNamePrefix("push-async-thread-");
         taskExecutor.initialize();
         return taskExecutor;
     }
