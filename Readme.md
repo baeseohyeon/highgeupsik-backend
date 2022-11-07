@@ -22,7 +22,7 @@
 * Query DSL
 * MYSQL
 
-### Architecture
+### Architecture(설계중, 아래는 멀티모듈 도입 전 아키텍쳐)
 
 ---
 ![하이급식서버아키텍쳐](https://user-images.githubusercontent.com/19234114/175031353-59052058-cff3-4e13-bea4-8a6137e96a9c.png)
