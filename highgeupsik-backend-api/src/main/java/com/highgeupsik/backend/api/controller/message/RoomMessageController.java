@@ -1,9 +1,9 @@
 package com.highgeupsik.backend.api.controller.message;
 
+import static com.highgeupsik.backend.api.controller.ApiUtils.success;
 import static org.springframework.http.HttpStatus.CREATED;
 
 import com.highgeupsik.backend.api.controller.ApiResult;
-import com.highgeupsik.backend.api.controller.ApiUtils;
 import com.highgeupsik.backend.api.resolver.LoginUser;
 import com.highgeupsik.backend.api.service.message.MessageQueryService;
 import com.highgeupsik.backend.api.service.message.RoomMessageService;
@@ -43,7 +43,7 @@ public class RoomMessageController {
 	@GetMapping
 	public ApiResult<Page<RoomDTO>> rooms(@LoginUser Long userId,
 		@RequestParam(value = "page", defaultValue = PagingUtils.DEFAULT_PAGE_NUMBER) Integer pageNum) {
-		return ApiUtils.success(roomQueryService.findAllByMyId(userId, pageNum));
+		return success(roomQueryService.findAllBySenderId(userId, pageNum));
 	}
 
 	@ApiOperation(value = "메세지 목록 조회")
@@ -51,13 +51,13 @@ public class RoomMessageController {
 	public ApiResult<List<MessageResDTO>> messages(@PathVariable Long roomId,
 		@RequestParam(value = "lastMessageId", required = false) Long lastMessageId) {
 		roomMessageService.readNewMessagesByRoomId(roomId);
-		return ApiUtils.success(messageQueryService.findAllByRoomIdAndOwnerId(roomId, lastMessageId));
+		return success(messageQueryService.findAllByRoomIdAndOwnerId(roomId, lastMessageId));
 	}
 
 	@ApiOperation(value = "메시지 룸 생성")
 	@PostMapping
 	public ApiResult<OnlyIdDTO> createRoom(@LoginUser Long userId, @RequestBody RoomCreateRequest req) {
-		return ApiUtils.success(roomMessageService.createRoom(userId, req.getReceiverId(), req.getBoardId()));
+		return success(roomMessageService.createRoom(userId, req.getReceiverId(), req.getBoardId()));
 	}
 
 	@ApiOperation(value = "메세지룸 삭제")
@@ -70,6 +70,6 @@ public class RoomMessageController {
 	@ResponseStatus(CREATED)
 	@PostMapping("/{roomId}/messages")
 	public ApiResult<Long> sendMessage(@PathVariable Long roomId, @RequestBody MessageReqDTO messageReqDTO) {
-		return ApiUtils.success(roomMessageService.sendMessage(roomId, messageReqDTO.getContent()));
+		return success(roomMessageService.sendMessage(roomId, messageReqDTO.getContent()));
 	}
 }
