@@ -4,10 +4,10 @@ spring:
       comment-created: v1.event.comment-created
       user-joined: v1.event.user-joined
     consumer:
-      bootstrap-servers: {KAFKA_URL}
+      bootstrap-servers: ${KAFKA_URL}
       group-id: api
       auto-offset-reset: latest
     producer:
-      bootstrap-servers: {KAFKA_URL}
+      bootstrap-servers: ${KAFKA_URL}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
