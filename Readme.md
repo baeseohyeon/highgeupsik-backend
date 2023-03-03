@@ -22,10 +22,10 @@
 * Query DSL
 * MySQL
 
-### Architecture(멀티모듈 도입 전 아키텍쳐)
+### 서버 구조
 
 ---
-![하이급식서버아키텍쳐](https://user-images.githubusercontent.com/19234114/175031353-59052058-cff3-4e13-bea4-8a6137e96a9c.png)
+<img width="1162" alt="스크린샷 2023-03-03 오후 2 48 36" src="https://user-images.githubusercontent.com/19234114/222641712-668d89a2-869f-4150-8c26-65f683912955.png">
 
 
 ### Design (프로토 타입)
